@@ -6,17 +6,17 @@ import javax.swing.JPanel;
 public class Clevis {
 	public JFrame canvas;
     public Clevis(){
-    	canvas = new JFrame();
-    	canvas.setBounds(10 , 10, 1000, 800);	
-    	canvas.setDefaultCloseOperation(3);
-    	JPanel pan = new JPanel() {
-    		@Override
-    		public void paint(Graphics g) {
-    			
-    		}
-    	};
-    	canvas.add(pan);
-    	canvas.setVisible(true);
+    	this.canvas = new JFrame();	
+    	init();
+    }
+    
+    public void init() {
+    	this.canvas.setTitle("TestFrame");
+    	this.canvas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	this.canvas.setSize(500,400);
+    	this.canvas.setLocationRelativeTo(null);
+    	this.canvas.setResizable(false);
+    	this.canvas.setVisible(true);
     }
 }
 
