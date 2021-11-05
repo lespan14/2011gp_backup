@@ -1,22 +1,40 @@
 package hk.edu.polyu.comp.comp2021.clevis.model;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Canvas;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Clevis {
-	public JFrame canvas;
+	public JFrame frame;
+	public Canvas canvas;
+	public Graphics g;
     public Clevis(){
-    	this.canvas = new JFrame();	
+    	this.frame = new JFrame();	
+    	this.canvas = new Canvas();
     	init();
     }
     
     public void init() {
-    	this.canvas.setTitle("TestFrame");
-    	this.canvas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    	this.canvas.setSize(500,400);
-    	this.canvas.setLocationRelativeTo(null);
-    	this.canvas.setResizable(false);
-    	this.canvas.setVisible(true);
+    	this.frame.setTitle("TestFrame");
+    	this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	this.frame.setSize(500,400);
+    	this.frame.setLocationRelativeTo(null);
+    	this.frame.setResizable(false);
+    	this.frame.setVisible(true);
+    	
+    	//JPanel pan = new JPanel();
+    	//pan.setLayout(new FlowLayout(FlowLayout.CENTER, 200,200));
+    	//pan.setBackground(Color.BLACK);
+    	//this.frame.add(pan,BorderLayout.NORTH);
+    	canvas.setBackground(Color.BLACK);
+    	this.frame.add(canvas);
+    }
+    public void paint(Graphics g) {
+    	g.setColor(Color.RED);
+    	g.fillRect(10, 10, 50, 50);
     }
 }
 
