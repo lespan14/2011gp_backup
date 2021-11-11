@@ -65,8 +65,8 @@ public class Clevis {
             this.name=name;
             this.shape=shape;
         }
-        public String getname(){return name;}
-        public Shape getshape(){return shape;}
+        public String getName(){return name;}
+        public Shape getShape(){return shape;}
         }
   
 }
