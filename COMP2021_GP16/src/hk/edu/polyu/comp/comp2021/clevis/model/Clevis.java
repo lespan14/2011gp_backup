@@ -91,6 +91,20 @@ public class Clevis {
         	// g.drawLine(x1, y1, x2, y2);
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
+	public static void paint(Graphics g){
+
+        	Graphics2D graphSettings= (Graphics2D) g;
+
+        	graphSettings.setStroke(new BasicStroke(2));
+        	Iterator<Color> strokeCounter = shapeStroke.iterator();
+
+        	for (NameShape s: shapes){
+            	graphSettings.setPaint(strokeCounter.next());
+            	graphSettings.draw(s.getShape());
+        	}
+    	}
 
 
 //ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
+// https://xiu2.net/it/details/6102e2b679193629343164a5
+
