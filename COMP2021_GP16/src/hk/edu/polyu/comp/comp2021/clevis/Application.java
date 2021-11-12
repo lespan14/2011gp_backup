@@ -45,7 +45,7 @@ public class Application implements Runnable{
     	//drawing currently performed here.
     	//move this to clevis class for easier management
     	// g.drawRect(10, 10, 50, 70);
-    	paint(g);
+    	// Clevis.paint(g);
 	    
     	bs.show();
     	g.dispose();
