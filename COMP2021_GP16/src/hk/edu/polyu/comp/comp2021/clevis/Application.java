@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
+
 import hk.edu.polyu.comp.comp2021.clevis.model.Clevis;
 
 import java.awt.Graphics;
@@ -43,8 +44,9 @@ public class Application implements Runnable{
     	
     	//drawing currently performed here
     	//move this to clevis class for easier management
-    	g.drawRect(10, 10, 50, 70);
-    	
+    	// g.drawRect(10, 10, 50, 70);
+    	paint(g);
+	    
     	bs.show();
     	g.dispose();
     }
