@@ -58,7 +58,7 @@ public class Clevis {
     }
     
 	
-	class NameShape {
+	static class NameShape {
             private String name;
             private Shape shape;
             public NameShape (String name, Shape shape){
@@ -91,11 +91,14 @@ public class Clevis {
         	// g.drawLine(x1, y1, x2, y2);
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
-	public static void paint(Graphics g){
+
+	//// Class used to define the shapes to be drawn
+	public void paint(Graphics g){
 
         	Graphics2D graphSettings= (Graphics2D) g;
-
+		// Defines the line width of the stroke
         	graphSettings.setStroke(new BasicStroke(2));
+		// Iterators created to cycle through strokes and fills
         	Iterator<Color> strokeCounter = shapeStroke.iterator();
 
         	for (NameShape s: shapes){
