@@ -42,7 +42,7 @@ public class Application implements Runnable{
     	
     	g.clearRect(10, 0, 500, 400);
     	
-    	//drawing currently performed here
+    	//drawing currently performed here.
     	//move this to clevis class for easier management
     	// g.drawRect(10, 10, 50, 70);
     	paint(g);
