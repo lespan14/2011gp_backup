@@ -95,12 +95,14 @@ public class Clevis {
 	//// Class used to define the shapes to be drawn
 	public void paint(Graphics g){
 
-        	Graphics2D graphSettings= (Graphics2D) g;
-		// Defines the line width of the stroke
+        	ArrayList<Color> shapeStroke = new ArrayList<Color>();
+        	Graphics2D graphSettings = (Graphics2D) g;
+        	// Defines the line width of the stroke
         	graphSettings.setStroke(new BasicStroke(2));
-		// Iterators created to cycle through strokes and fills
+        	// Iterators created to cycle through strokes and fills
         	Iterator<Color> strokeCounter = shapeStroke.iterator();
-
+        	shapeStroke.add(Color.GREEN);
+		
         	for (NameShape s: shapes){
             	graphSettings.setPaint(strokeCounter.next());
             	graphSettings.draw(s.getShape());
