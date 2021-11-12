@@ -59,7 +59,7 @@ public class Clevis {
     }
     
 	
-	static class NameShape {
+	public static class NameShape {
             private String name;
             private Shape shape;
             public NameShape (String name, Shape shape){
