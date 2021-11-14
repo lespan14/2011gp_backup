@@ -62,6 +62,14 @@ public class Log {
 			logger.write('\n');
 			logger.close();
 			
+			File htmlFile = new File(this.htmlname);
+			FileWriter html = new FileWriter(htmlFile, true);
+			html.write("\t<tr>\n"
+						+ "\t\t<th>" + counter + "</th>\n"
+						+ "\t\t<th>" + text + "</th>\n"
+						+ "\t</tr>\n");
+			counter ++;
+			html.close();
 		}
 		catch (IOException e) {
 			System.out.println("error");
@@ -71,3 +79,4 @@ public class Log {
 	
 	
 }
+
