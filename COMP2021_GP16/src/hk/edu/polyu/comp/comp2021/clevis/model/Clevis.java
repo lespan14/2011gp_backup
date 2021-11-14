@@ -138,6 +138,34 @@
 			}
 		}
 	}
+
+	public void delete (String n){
+        boolean isgroup=false;
+        List<NameShape> shapesID= new ArrayList<>();
+        for (NameShape s: shapes){
+            if (s.getName()==n){
+                shapes.remove(s);
+                break;
+            }
+        }for (Groups g: groups){
+            if (g.getName()==n){
+                groups.remove(g);
+                shapesID= g.shapes;
+                isgroup=true;
+                break;
+            }
+        }if (isgroup){
+            for (NameShape sID: shapesID){
+                for (NameShape s: shapes){
+                    if (s.getName()==sID.getName()){
+                        shapes.remove(s);
+                        break;
+                }
+            }
+        }
+    }
+}
+		
 	
 
 	/*
