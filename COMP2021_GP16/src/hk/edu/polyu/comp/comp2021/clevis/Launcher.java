@@ -6,7 +6,7 @@ import hk.edu.polyu.comp.comp2021.clevis.log.Log;
 
 public class Launcher {
     public static void main(String[] args){
-    	Log logger = new Log("", "LogTest.txt");
+    	Log logger = new Log("LogTest.html", "LogTest.txt");
     	//System.out.println("logger creation done");
     	logger.WriteLog("testing message");
     	logger.WriteLog("testing message 2");
