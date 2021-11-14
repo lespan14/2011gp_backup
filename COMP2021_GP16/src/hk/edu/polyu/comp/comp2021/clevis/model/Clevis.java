@@ -70,7 +70,7 @@ public class Clevis {
         public Shape getShape(){return shape;}
         }
   
-}
+
 	public List<NameShape> shapes= new ArrayList<>();
 
 	public void rectangle (String n, double x, double y, double w, double h){
@@ -108,9 +108,10 @@ public class Clevis {
             	graphSettings.setPaint(strokeCounter.next());
             	graphSettings.draw(s.getShape());
         	}
-    	}
+    	
 
-
+	}
+}
 //ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
 // https://xiu2.net/it/details/6102e2b679193629343164a5
 
