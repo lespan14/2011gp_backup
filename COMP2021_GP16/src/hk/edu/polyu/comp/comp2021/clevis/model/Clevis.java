@@ -93,6 +93,10 @@ public class Clevis {
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
 
+	
+	
+	
+	/*
 	//// Class used to define the shapes to be drawn
 	public void paint(Graphics g){
 
@@ -108,9 +112,9 @@ public class Clevis {
             	graphSettings.setPaint(strokeCounter.next());
             	graphSettings.draw(s.getShape());
         	}
-    	
-
+   
 	}
+	*/
 }
 //ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
 // https://xiu2.net/it/details/6102e2b679193629343164a5
