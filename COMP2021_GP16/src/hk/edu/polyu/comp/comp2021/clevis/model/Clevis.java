@@ -1,20 +1,5 @@
-package hk.edu.polyu.comp.comp2021.clevis.model;
-/*import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Canvas;
-import java.awt.Graphics;*/
-import java.awt.*;
-import java.awt.geom.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-public class Clevis {
+	private static int GroupCounter = 0;
+	/*
 	public JFrame frame;
 	public Canvas canvas;
 	private String title;
@@ -57,20 +42,53 @@ public class Clevis {
     	this.frame.add(canvas);
     	this.frame.pack();
     }
-    
+    */
 	
 	public static class NameShape {
             private String name;
             private Shape shape;
+            private Boolean grouped = false;
+            private int groupID;
             public NameShape (String name, Shape shape){
             this.name=name;
             this.shape=shape;
         }
         public String getName(){return name;}
         public Shape getShape(){return shape;}
+        
+        public void grouped(int ID){
+        	grouped = true;
+        	this.groupID = ID;}
+        
+        public void ungrouped(){grouped = false;}
+    }
+	
+	public static class Groups {
+        private String name;
+        private int groupID;
+        private List<NameShape> shapes= new ArrayList<>();
+        public Groups(String name, int groupID){
+        	this.name = name;
+        	this.groupID = groupID;
         }
-  
-
+        
+    public void add(NameShape adder) {
+        this.shapes.add(adder);
+    }
+    public void remove(NameShape adder) {
+    	this.shapes.remove(adder);
+    }
+    public String getName() {
+    	return this.name;
+    }
+    public int getID() {
+    	return this.groupID;
+    }
+	
+}
+	
+	
+	public List<Groups> groups = new ArrayList<>();
 	public List<NameShape> shapes= new ArrayList<>();
 
 	public void rectangle (String n, double x, double y, double w, double h){
@@ -92,10 +110,36 @@ public class Clevis {
         	// g.drawLine(x1, y1, x2, y2);
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
+	
+	public void group (String n, String[] nList) {
+		Groups temp = new Groups(n, GroupCounter);
+		for (String i : nList) {
+			for (int j = 0; j< shapes.size(); j++) {
+				if (shapes.get(j).getName() == i) {
+					temp.add(shapes.get(j));
+					shapes.get(j).grouped(GroupCounter);
+					break;
+				}
+			}
+		}
+		groups.add(temp);
+		GroupCounter++;
+	}
+	
+	public void ungroup (String n) {
+		for (int i = 0; i < groups.size(); i++) {
+			if (groups.get(i).getName() == n) {
+				Groups temp = groups.get(i);
+				for (int y =0; y < temp.shapes.size(); y++) {
+					temp.shapes.get(y).ungrouped();
+				}
+				groups.remove(i);
+				break;
+			}
+		}
+	}
+	
 
-	
-	
-	
 	/*
 	//// Class used to define the shapes to be drawn
 	public void paint(Graphics g){
@@ -112,10 +156,7 @@ public class Clevis {
             	graphSettings.setPaint(strokeCounter.next());
             	graphSettings.draw(s.getShape());
         	}
-   
+    	
+
 	}
 	*/
-}
-//ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
-// https://xiu2.net/it/details/6102e2b679193629343164a5
-
