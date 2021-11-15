@@ -1,5 +1,22 @@
+package hk.edu.polyu.comp.comp2021.clevis.model;
+/*import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Canvas;
+import java.awt.Graphics;*/
+import java.awt.*;
+import java.awt.geom.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Clevis {
+	
 	private static int GroupCounter = 0;
-	import java.awt.geom.Area;
 	/*
 	public JFrame frame;
 	public Canvas canvas;
@@ -112,23 +129,6 @@
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
 	
-	public boolean intersect(String n1, String n2) {
-		List<NameShape> shapesID= new ArrayList<>();
-		for (NameShape s: shapes){
-            if (s.getName()==n1){
-            	a = s.getShape();
-            }
-		}
-		for (NameShape t: shapes){
-            if (t.getName()==n2){
-            	b = t.getShape();
-            }
-		}
-		Area areaA = new Area(a);
-		areaA.intersect(new Area(b));
-		return !areaA.isEmpty();
-	}
-	
 	public void group (String n, String[] nList) {
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
@@ -156,7 +156,7 @@
 			}
 		}
 	}
-
+	
 	public void delete (String n){
         boolean isgroup=false;
         List<NameShape> shapesID= new ArrayList<>();
@@ -167,7 +167,7 @@
             }
         }for (Groups g: groups){
             if (g.getName()==n){
-            	shapesID= g.shapes;
+                shapesID= g.shapes;
                 groups.remove(g);
                 isgroup=true;
                 break;
@@ -182,35 +182,51 @@
             }
         }
     }
-}
+	}
+	
+	public String boundingbox (String n){
+		NameShape Shape = null;
+		float x;
+		float y;
+		float w;
+		float h;
 
-		public String boundingbox (String n){
-			NameShape Shape;
-			float x;
-			float y;
-			float w;
-			float h;
-
-			for (int i = 0; i < groups.size(); i++) {
-				if (shapes.get(i).getName() == n) {
-					Shape = shapes.get(i);
-				}
+		for (int i = 0; i < groups.size(); i++) {
+			if (shapes.get(i).getName() == n) {
+				Shape = shapes.get(i);
+				break;
 			}
+		}
 
-			Rectangle2D boundbox = Shape.getBounds2D();
+		Rectangle2D boundbox = Shape.getShape().getBounds2D();
 
-			x = boundbox.getX();
-			y = boundbox.getY();
-			w = boundbox.getWidth();
-			h = boundbox.getHeight();
+		x = (float)boundbox.getX();
+		y = (float)boundbox.getY();
+		w = (float)boundbox.getWidth();
+		h = (float)boundbox.getHeight();
 
-			return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
-
-
-
+		return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
+	}
+	
+	public boolean intersect(String n1, String n2) {
+		Shape a = null, b = null;
+		for (NameShape s: shapes){
+            if (s.getName()==n1){
+            	a = s.getShape();
+            	break;
+            }
+		}
+		for (NameShape t: shapes){
+            if (t.getName()==n2){
+            	b = t.getShape();
+            	break;
+            }
 		}
 		
-	
+		Area areaA = new Area(a);
+		areaA.intersect(new Area(b));
+		return !areaA.isEmpty();
+	}
 
 	/*
 	//// Class used to define the shapes to be drawn
@@ -232,3 +248,6 @@
 
 	}
 	*/
+}
+//ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
+// https://xiu2.net/it/details/6102e2b679193629343164a5
