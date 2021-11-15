@@ -149,8 +149,8 @@
             }
         }for (Groups g: groups){
             if (g.getName()==n){
+		shapesID= g.shapes;
                 groups.remove(g);
-                shapesID= g.shapes;
                 isgroup=true;
                 break;
             }
