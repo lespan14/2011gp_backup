@@ -285,7 +285,7 @@ public class Clevis {
 		
 	}
 
-	public void exit() {
+	public void quit() {
         	System.exit(0);
     	}
 	/*
