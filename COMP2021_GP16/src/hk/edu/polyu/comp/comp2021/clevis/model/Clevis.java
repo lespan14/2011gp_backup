@@ -228,6 +228,62 @@ public class Clevis {
 		areaA.intersect(new Area(b));
 		return !areaA.isEmpty();
 	}
+	
+	public void move(String n, double dx, double dy) {
+		
+		Rectangle2D.Double recTemp = new Rectangle2D.Double();
+		Line2D.Double lineTemp = new Line2D.Double();
+		Ellipse2D.Double ellTemp = new Ellipse2D.Double();
+		
+		
+		boolean isgroup = false;
+		List<NameShape> shapesID= new ArrayList<>();
+		for (Groups g:groups) {
+			if (g.getName()==n) {
+				isgroup = true;
+				shapesID= g.shapes;
+				break;
+			}
+		}
+		if (isgroup) {
+			for (NameShape sID : shapesID) {
+				Shape temp = sID.getShape();
+				if (temp.getClass() == recTemp.getClass()) {
+					recTemp = (Rectangle2D.Double)temp;
+					recTemp.setRect(recTemp.getX() +dx, recTemp.getY()+dy, recTemp.getWidth(), recTemp.getHeight());
+				}
+				else if (temp.getClass() == lineTemp.getClass()) {
+					lineTemp = (Line2D.Double)temp;
+					lineTemp.setLine(lineTemp.getX1()+dx, lineTemp.getY1()+dy, lineTemp.getX2()+dx, lineTemp.getY2()+dy);
+				}
+				else if (temp.getClass() == ellTemp.getClass()) {
+					ellTemp = (Ellipse2D.Double)temp;
+					ellTemp.setFrame(ellTemp.getX()+dx, ellTemp.getY()+dy, ellTemp.getWidth(), ellTemp.getHeight());
+				}
+			}
+		}
+		else {
+			for (NameShape s: shapes){
+	            if (s.getName()==n){
+	            	Shape temp = s.getShape();
+					if (temp.getClass() == recTemp.getClass()) {
+						recTemp = (Rectangle2D.Double)temp;
+						recTemp.setRect(recTemp.getX() +dx, recTemp.getY()+dy, recTemp.getWidth(), recTemp.getHeight());
+					}
+					else if (temp.getClass() == lineTemp.getClass()) {
+						lineTemp = (Line2D.Double)temp;
+						lineTemp.setLine(lineTemp.getX1()+dx, lineTemp.getY1()+dy, lineTemp.getX2()+dx, lineTemp.getY2()+dy);
+					}
+					else if (temp.getClass() == ellTemp.getClass()) {
+						ellTemp = (Ellipse2D.Double)temp;
+						ellTemp.setFrame(ellTemp.getX()+dx, ellTemp.getY()+dy, ellTemp.getWidth(), ellTemp.getHeight());
+					}
+	                break;
+	            }
+			}	
+		}
+		
+	}
 
 	public void exit() {
         	System.exit(0);
