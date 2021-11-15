@@ -183,6 +183,32 @@
         }
     }
 }
+
+		public String boundingbox (String n){
+			NameShape Shape;
+			float x;
+			float y;
+			float w;
+			float h;
+
+			for (int i = 0; i < groups.size(); i++) {
+				if (shapes.get(i).getName() == n) {
+					Shape = shapes.get(i);
+				}
+			}
+
+			Rectangle2D boundbox = Shape.getBounds2D();
+
+			x = boundbox.getX();
+			y = boundbox.getY();
+			w = boundbox.getWidth();
+			h = boundbox.getHeight();
+
+			return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
+
+
+
+		}
 		
 	
 
