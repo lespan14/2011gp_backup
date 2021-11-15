@@ -1,4 +1,5 @@
 	private static int GroupCounter = 0;
+	import java.awt.geom.Area;
 	/*
 	public JFrame frame;
 	public Canvas canvas;
@@ -111,6 +112,23 @@
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
 	
+	public boolean intersect(String n1, String n2) {
+		List<NameShape> shapesID= new ArrayList<>();
+		for (NameShape s: shapes){
+            if (s.getName()==n1){
+            	a = s.getShape();
+            }
+		}
+		for (NameShape t: shapes){
+            if (t.getName()==n2){
+            	b = t.getShape();
+            }
+		}
+		Area areaA = new Area(a);
+		areaA.intersect(new Area(b));
+		return !areaA.isEmpty();
+	}
+	
 	public void group (String n, String[] nList) {
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
@@ -149,7 +167,7 @@
             }
         }for (Groups g: groups){
             if (g.getName()==n){
-		shapesID= g.shapes;
+            	shapesID= g.shapes;
                 groups.remove(g);
                 isgroup=true;
                 break;
