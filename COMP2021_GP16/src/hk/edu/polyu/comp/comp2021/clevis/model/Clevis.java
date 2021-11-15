@@ -105,10 +105,9 @@ public class Clevis {
 	
 }
 	
-	
 	public List<Groups> groups = new ArrayList<>();
 	public List<NameShape> shapes= new ArrayList<>();
-
+	
 	public void rectangle (String n, double x, double y, double w, double h){
         	// g.drawRect(x, y, w, h);
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, w, h)));
@@ -158,30 +157,32 @@ public class Clevis {
 	}
 	
 	public void delete (String n){
-        boolean isgroup=false;
-        List<NameShape> shapesID= new ArrayList<>();
-        for (NameShape s: shapes){
-            if (s.getName()==n){
-                shapes.remove(s);
-                break;
-            }
-        }for (Groups g: groups){
-            if (g.getName()==n){
-                shapesID= g.shapes;
-                groups.remove(g);
-                isgroup=true;
-                break;
-            }
-        }if (isgroup){
-            for (NameShape sID: shapesID){
-                for (NameShape s: shapes){
-                    if (s.getName()==sID.getName()){
-                        shapes.remove(s);
-                        break;
-                }
-            }
-        }
-    }
+        	boolean isgroup=false;
+        	List<NameShape> shapesID= new ArrayList<>();
+        	for (NameShape s: shapes){
+            		if (s.getName()==n){
+                		shapes.remove(s);
+                		break;
+            		}
+        	}
+		for (Groups g: groups){
+            		if (g.getName()==n){
+                		shapesID= g.shapes;
+                		groups.remove(g);
+                		isgroup=true;
+                		break;
+            		}
+        	}
+		if (isgroup){
+            		for (NameShape sID: shapesID){
+                		for (NameShape s: shapes){
+                    			if (s.getName()==sID.getName()){
+                        			shapes.remove(s);
+                        			break;
+                			}
+            			}
+        		}
+    		}
 	}
 	
 	public String boundingbox (String n){
@@ -211,16 +212,16 @@ public class Clevis {
 	public boolean intersect(String n1, String n2) {
 		Shape a = null, b = null;
 		for (NameShape s: shapes){
-            if (s.getName()==n1){
-            	a = s.getShape();
-            	break;
-            }
+            		if (s.getName()==n1){
+            			a = s.getShape();
+            			break;
+            		}
 		}
 		for (NameShape t: shapes){
-            if (t.getName()==n2){
-            	b = t.getShape();
-            	break;
-            }
+            		if (t.getName()==n2){
+            			b = t.getShape();
+            			break;
+            		}
 		}
 		
 		Area areaA = new Area(a);
@@ -228,6 +229,9 @@ public class Clevis {
 		return !areaA.isEmpty();
 	}
 
+	public void exit() {
+        	System.exit(0);
+    	}
 	/*
 	//// Class used to define the shapes to be drawn
 	public void paint(Graphics g){
