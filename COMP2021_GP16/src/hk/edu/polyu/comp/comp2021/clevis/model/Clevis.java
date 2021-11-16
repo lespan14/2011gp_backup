@@ -81,7 +81,7 @@ public class Clevis {
         public void ungrouped(){grouped = false;}
 	
 	public boolean isContained(String n){
-		For (Name s:shapes){
+		For (NameShape s:shapes){
 			return s.getName()==n;
 		}
 		return false;
