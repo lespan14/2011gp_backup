@@ -37,6 +37,7 @@ public class Application{
 				double rewidth = Double.parseDouble(tokens[4]);
 				double reheight = Double.parseDouble(tokens[5]);
 				clevis.rectangle(recname, rex, rey, rewidth, reheight);
+				
 				break;
 			case "line" :
 				String linename = tokens[1];
@@ -54,20 +55,49 @@ public class Application{
 				clevis.circle(cirname, cix, ciy, cirad);
 				break;
 			case "square" :
+				String squname = tokens[1];
+				double squx = Double.parseDouble(tokens[2]);
+				double squy = Double.parseDouble(tokens[3]);
+				double squwidth = Double.parseDouble(tokens[4]);
+				clevis.square(squname, squx, squy, squwidth);
 				break;
 			case "group" :
+				String grname = tokens[1];
+				int i =3;
+				String [] nList = {tokens[2]};
+				while (tokens[i] != null) {
+					String [] tempList = new String[nList.length+1];
+					tempList = nList.clone();
+					tempList[tempList.length-1] = tokens[i];
+					nList = tempList;
+				}
+				clevis.group(grname, nList);
 				break;
 			case "ungroup":
+				String ungrname = tokens[1];
+				clevis.ungroup(ungrname);
 				break;
 			case "delete":
+				String delname = tokens[1];
+				clevis.delete(delname);
 				break;
 			case "boundingbox" :
+				String bouname = tokens[1];
+				clevis.boundingbox(bouname);
 				break;
 			case "move" :
+				String movname = tokens[1];
+				Double dx =  Double.parseDouble(tokens[2]);
+				Double dy =  Double.parseDouble(tokens[3]);
+				clevis.move(movname, dx, dy);
 				break;
 			case "intersect" :
+				String iname1 = tokens[1];
+				String iname2 = tokens[2];
+				clevis.intersect(iname1, iname2);
 				break;
 			case "quit" :
+				clevis.quit();
 				break;
 			default :
 				System.out.println("Invalid input, please input again\n");
@@ -75,12 +105,9 @@ public class Application{
 				
 			}
 			
-			
 		}
 		
 	} 
-	
-	
 	
 	
 	//print menu screen
