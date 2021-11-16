@@ -316,6 +316,59 @@ public class Clevis {
 		
 	}
 	
+	public void list(String n){
+
+            Rectangle2D.Double recTemp = new Rectangle2D.Double();
+            Line2D.Double lineTemp = new Line2D.Double();
+            Ellipse2D.Double ellTemp = new Ellipse2D.Double();
+
+            boolean isgroup = false;
+            String groupname="";
+            List<NameShape> shapesID = new ArrayList<>();
+            for (Groups g : groups) {
+                if (g.getName() == n) {
+                    isgroup = true;
+                    shapesID = g.shapes;
+                    groupname=g.getName();
+                    break;
+                }
+            }
+                if (isgroup) {
+                    System.out.println("The name of the shape is: "+ groupname);
+                    System.out.println("The shapes in group are: ");
+                    for (NameShape sID : shapesID) {
+                        System.out.println(sID.getName());
+                    }
+
+                    }
+                 else {
+                    for (NameShape s : shapes) {
+                        if (s.getName() == n) {
+                            Shape temp = s.getShape();
+                            if (temp.getClass() == recTemp.getClass()) {
+                                recTemp = (Rectangle2D.Double) temp;
+                                System.out.println("The name of the shape is: "+s.getName());
+                                System.out.println("The width of the shape is:"+String.format("%.2f", recTemp.getWidth()));
+                                System.out.println("The height of the shape is:"+String.format("%.2f", recTemp.getHeight()));
+                            } else if (temp.getClass() == lineTemp.getClass()) {
+                                lineTemp = (Line2D.Double) temp;
+                                double x = lineTemp.getX1() - lineTemp.getX2();
+                                double y = lineTemp.getY1() - lineTemp.getY2();
+                                System.out.println("The name of the line is: "+s.getName());
+                                System.out.println("The length of the line is: "+String.format("%.2f",Math.sqrt(x * x + y * y)));
+                            } else if (temp.getClass() == ellTemp.getClass()) {
+                                ellTemp = (Ellipse2D.Double) temp;
+                                System.out.println("The name of the circle is: "+s.getName());
+                                System.out.println("The x of the centre of the circle is: "+String.format("%.2f",ellTemp.getX()+ellTemp.getWidth()/2));
+                                System.out.println("The y of the centre of the circle is: "+String.format("%.2f",ellTemp.getY()+ellTemp.getWidth()/2));
+                                System.out.println("The radius of the circle is: "+String.format("%.2f",ellTemp.getWidth()/2));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+	
 	public void quit() {
 		System.exit(0);
 	}
