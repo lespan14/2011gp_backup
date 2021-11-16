@@ -2,11 +2,11 @@ package hk.edu.polyu.comp.comp2021.clevis;
 
 
 import hk.edu.polyu.comp.comp2021.clevis.model.Clevis;
-
+import hk.edu.polyu.comp.comp2021.clevis.log.*;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.*;
-import java.io.Console;
+import java.util.Scanner;
 
 public class Application{
 	
@@ -15,20 +15,22 @@ public class Application{
 	//String title;
 	//private boolean running = false;
 	private Clevis clevis;
+	Log logger;
 	//BufferStrategy bs;
 	//public Graphics g;
 	
-	public Application() {
+	public Application(String html, String filename) {
 		clevis = new Clevis();
-		Console console = System.console();
+		logger = new Log(html, filename);
+		Scanner console = new Scanner(System.in);
 		while (true) {
 			menu();
 			String input = "";
 			String command ="";
-			input = console.readLine();
+			input = console.nextLine();
 			String[] tokens = input.split("\\s+");
 			command = tokens[0];
-			
+			logger.WriteLog(input);
 			switch (command) {
 			case "rectangle" :
 				String recname = tokens[1];
