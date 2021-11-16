@@ -85,8 +85,8 @@ public class Clevis {
 	public void rectangle (String n, double x, double y, double w, double h){
         	// g.drawRect(x, y, w, h);
 		if (this.isContained(n)){
-    		System.out.println("Name already existed");
-    		return;
+    			System.out.println("Name already existed");
+    			return;
 		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, w, h)));
 		System.out.println("Rectangle " + n + " has been created");
@@ -96,7 +96,7 @@ public class Clevis {
         	// g.drawOval(x, y, r, r);
 		if (isContained(n)){
 			System.out.println("Name already existed");
-    		return;
+    			return;
 		}
 		shapes.add(new NameShape(n, new Ellipse2D.Double(x, y, r, r)));
 		System.out.println("Circle " + n + " has been created");
@@ -105,8 +105,9 @@ public class Clevis {
 	public void square (String n, double x, double y, double l){
        	 	// g.drawRect(x, y, l, l);
 		if (isContained(n)){
-    		System.out.println("Name already existed");
-    		return;		}
+    			System.out.println("Name already existed");
+    			return;		
+		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, l, l)));
 		System.out.println("Square " + n + " has been created");
    	}
@@ -114,8 +115,8 @@ public class Clevis {
 	public void line (String n, double x1, double y1, double x2, double y2){
         	// g.drawLine(x1, y1, x2, y2);
 		if (isContained(n)){
-    		System.out.println("Name already existed");
-    		return;
+    			System.out.println("Name already existed");
+    			return;
     		}
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
 		System.out.println("Lines " + n + " has been created");
@@ -123,12 +124,12 @@ public class Clevis {
 	
 	public void group (String n, String[] nList) {
 		if (isContained(n)){
-    		System.out.println("Name already existed");
-    		return;
+    			System.out.println("Name already existed");
+    			return;
     		}
 		if (isContainedGroup(n)){
-    		System.out.println("Name already existed");
-    		return;
+    			System.out.println("Name already existed");
+    			return;
     		}
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
@@ -140,6 +141,8 @@ public class Clevis {
 				}
 			}
 		}
+		NameShape groupinshape=new NameShape(n,null);
+        	shapes.add(groupinshape);
 		groups.add(temp);
 		GroupCounter++;
 		System.out.println("Group " + n + " has been formed");
@@ -277,9 +280,9 @@ public class Clevis {
 		}
 		else {
 			for (NameShape s: shapes){
-	            if (s.getName().equals(n) && s.grouped == false){
-	            	System.out.println("shape found");
-	            	Shape temp = s.getShape();
+	            	if (s.getName().equals(n) && s.grouped == false){
+	            		System.out.println("shape found");
+	            		Shape temp = s.getShape();
 					if (temp.getClass() == recTemp.getClass()) {
 						recTemp = (Rectangle2D.Double)temp;
 						recTemp.setRect(recTemp.getX() +dx, recTemp.getY()+dy, recTemp.getWidth(), recTemp.getHeight());
@@ -322,7 +325,7 @@ public class Clevis {
                 System.out.println("The name of the shape is: "+ groupname);
                 System.out.println("The shapes in group are: ");
                 for (NameShape sID : shapesID) {
-                    System.out.println(sID.getName());
+                    System.out.println("        "+sID.getName());
                 }
 
                 }
