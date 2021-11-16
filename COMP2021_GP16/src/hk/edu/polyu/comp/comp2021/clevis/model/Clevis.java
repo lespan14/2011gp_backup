@@ -216,25 +216,28 @@ public class Clevis {
 		return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
 	}
 	
-	public boolean intersect(String n1, String n2) {
-		Shape a = null, b = null;
-		for (NameShape s: shapes){
-            		if (s.getName().equals(n1)){
-            			a = s.getShape();
-            			break;
-            		}
-		}
-		for (NameShape t: shapes){
-            		if (t.getName().equals(n2)){
-            			b = t.getShape();
-            			break;
-            		}
-		}
-		
-		Area areaA = new Area(a);
-		areaA.intersect(new Area(b));
-		return !areaA.isEmpty();
-	}
+	public void intersect(String n1, String n2) {
+        Shape a = null, b = null;
+        for (NameShape s: shapes){
+            if (s.getName().equals(n1)){
+                a = s.getShape();
+                break;
+            }
+        }
+        for (NameShape t: shapes){
+            if (t.getName().equals(n2)){
+                b = t.getShape();
+                break;
+            }
+        }
+        Area areaA = new Area(a);
+        areaA.intersect(new Area(b));
+        if(!areaA.isEmpty()) {
+        	System.out.println("intersects");
+        }else {
+        	System.out.println("not intersects");
+        }
+    }
 	
 	public void move(String n, double dx, double dy) {
 		
