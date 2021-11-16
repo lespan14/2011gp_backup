@@ -79,7 +79,13 @@ public class Clevis {
         	this.groupID = ID;}
         
         public void ungrouped(){grouped = false;}
-    }
+	
+	public boolean isContained(String n){
+		For (Name s:shapes){
+			return s.getName()==n;
+		}
+		return false;
+    	}
 	
 	public static class Groups {
         private String name;
@@ -110,25 +116,40 @@ public class Clevis {
 	
 	public void rectangle (String n, double x, double y, double w, double h){
         	// g.drawRect(x, y, w, h);
+		if (isContained(n)){
+            		throw new IllegalArgumentException("This name already existed.");
+		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, w, h)));
     	}
 
 	public void circle (String n, double x, double y, double r){
         	// g.drawOval(x, y, r, r);
+		if (isContained(n)){
+            		throw new IllegalArgumentException("This name already existed.");
+		}
 		shapes.add(new NameShape(n, new Ellipse2D.Double(x, y, r, r)));
     	}
     
 	public void square (String n, double x, double y, double l){
        	 	// g.drawRect(x, y, l, l);
+		if (isContained(n)){
+            		throw new IllegalArgumentException("This name already existed.");
+		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, l, l)));
    	}
 
 	public void line (String n, double x1, double y1, double x2, double y2){
         	// g.drawLine(x1, y1, x2, y2);
+		if (isContained(n)){
+            		throw new IllegalArgumentException("This name already existed.");
+		}
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
     	}
 	
 	public void group (String n, String[] nList) {
+		if (isContained(n)){
+            		throw new IllegalArgumentException("This name already existed.");
+		}
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
 			for (int j = 0; j< shapes.size(); j++) {
