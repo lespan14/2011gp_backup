@@ -163,7 +163,7 @@ public class Clevis {
         	boolean isgroup=false;
         	List<NameShape> shapesID= new ArrayList<>();
         	for (NameShape s: shapes){
-            		if (s.getName().equals(n)){
+            		if (s.getName().equals(n) && s.grouped == false){
                 		shapes.remove(s);
                 		System.out.println("Shape " + n + " has been deleted");
                 		break;
@@ -217,27 +217,27 @@ public class Clevis {
 	}
 	
 	public void intersect(String n1, String n2) {
-        Shape a = null, b = null;
-        for (NameShape s: shapes){
-            if (s.getName().equals(n1)){
-                a = s.getShape();
-                break;
-            }
-        }
-        for (NameShape t: shapes){
-            if (t.getName().equals(n2)){
-                b = t.getShape();
-                break;
-            }
-        }
-        Area areaA = new Area(a);
-        areaA.intersect(new Area(b));
-        if(!areaA.isEmpty()) {
-        	System.out.println("intersects");
-        }else {
-        	System.out.println("not intersects");
-        }
-    }
+		Shape a = null, b = null;
+		for (NameShape s: shapes){
+		    if (s.getName().equals(n1)){
+			a = s.getShape();
+			break;
+		    }
+		}
+		for (NameShape t: shapes){
+		    if (t.getName().equals(n2)){
+			b = t.getShape();
+			break;
+		    }
+		}
+		Area areaA = new Area(a);
+		areaA.intersect(new Area(b));
+		if(!areaA.isEmpty()) {
+			System.out.println("intersects");
+		}else {
+			System.out.println("not intersects");
+		}
+	}
 	
 	public void move(String n, double dx, double dy) {
 		
@@ -277,7 +277,7 @@ public class Clevis {
 		}
 		else {
 			for (NameShape s: shapes){
-	            if (s.getName().equals(n)){
+	            if (s.getName().equals(n) && s.grouped == false){
 	            	System.out.println("shape found");
 	            	Shape temp = s.getShape();
 					if (temp.getClass() == recTemp.getClass()) {
@@ -358,9 +358,11 @@ public class Clevis {
     public void listAll(){
         for (int i=shapes.size()-1;i>=0;i--)
                 list(shapes.get(i).getName());
+        	System.out.println("------------");
         }
 
     public void quit() {
+	System.out.println("Shutting down...");
         System.exit(0);
     }
 	
