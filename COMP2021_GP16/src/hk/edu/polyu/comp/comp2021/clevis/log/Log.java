@@ -58,7 +58,9 @@ public class Log {
 		try {
 			File logFile = new File(this.filename);
 			FileWriter logger = new FileWriter(logFile, true);
-			logger.write(text);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+			LocalDateTime now = LocalDateTime.now();
+			logger.write(dtf.format(now) + " : " + text);
 			logger.write('\n');
 			logger.close();
 			
