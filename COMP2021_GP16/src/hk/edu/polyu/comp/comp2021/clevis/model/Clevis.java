@@ -17,51 +17,7 @@ import javax.swing.JPanel;
 public class Clevis {
 	
 	private static int GroupCounter = 0;
-	/*
-	public JFrame frame;
-	public Canvas canvas;
-	private String title;
-	private int width;
-	private int height;
-	public Clevis(){
-    	this.frame = new JFrame();	
-    	this.canvas = new Canvas();
-    	this.width = 500;
-    	this.height = 800;
-    	this.title = "Testing";
-    	init();
-	}
-	
-    public Clevis(String title, int width, int height){
-    	this.frame = new JFrame();	
-    	this.canvas = new Canvas();
-    	this.width = width;
-    	this.height = height;
-    	this.title = title;
-    	init();
-    	}
-    
-    public void init() {
-    	this.frame.setTitle(title);
-    	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	this.frame.setSize(width,height);
-    	this.frame.setLocationRelativeTo(null);
-    	this.frame.setResizable(false);
-    	this.frame.setVisible(true);
-    	
-    	//JPanel pan = new JPanel();
-    	//pan.setLayout(new FlowLayout(FlowLayout.CENTER, 200,200));
-    	//pan.setBackground(Color.BLACK);
-    	//this.frame.add(pan,BorderLayout.NORTH);
-    	this.canvas.setBackground(Color.WHITE);
-    	this.canvas.setPreferredSize(new Dimension(width,height));
-    	this.canvas.setMaximumSize(new Dimension(width,height));
-    	this.canvas.setMinimumSize(new Dimension(width,height));
-    	this.frame.add(canvas);
-    	this.frame.pack();
-    }
-    */
-	
+
 	public static class NameShape {
             private String name;
             private Shape shape;
@@ -81,15 +37,20 @@ public class Clevis {
         public void ungrouped(){grouped = false;}
 	}
 	public boolean isContained(String n){
-		for (NameShape s:shapes){
-			return s.getName()==n;
+		
+		for (int i =0 ; i< shapes.size(); i++){
+			if(shapes.get(i).getName().equals(n)) {
+				return true;
+			}
 		}
 		return false;
     	}
 	
 	public boolean isContainedGroup (String n){
-		for (Groups s:groups){
-			return s.getName()==n;
+		for (int i =0 ; i< groups.size(); i++){
+			if(groups.get(i).getName().equals(n)) {
+				return true;
+			}
 		}
 		return false;
     	}
@@ -123,43 +84,52 @@ public class Clevis {
 	
 	public void rectangle (String n, double x, double y, double w, double h){
         	// g.drawRect(x, y, w, h);
-		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
+		if (this.isContained(n)){
+    		System.out.println("Name already existed");
+    		return;
 		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, w, h)));
+		System.out.println("Rectangle " + n + " has been created");
     	}
 
 	public void circle (String n, double x, double y, double r){
         	// g.drawOval(x, y, r, r);
 		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
+			System.out.println("Name already existed");
+    		return;
 		}
 		shapes.add(new NameShape(n, new Ellipse2D.Double(x, y, r, r)));
+		System.out.println("Circle " + n + " has been created");
     	}
     
 	public void square (String n, double x, double y, double l){
        	 	// g.drawRect(x, y, l, l);
 		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
-		}
+    		System.out.println("Name already existed");
+    		return;		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, l, l)));
+		System.out.println("Square " + n + " has been created");
    	}
 
 	public void line (String n, double x1, double y1, double x2, double y2){
         	// g.drawLine(x1, y1, x2, y2);
 		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
-		}
+    		System.out.println("Name already existed");
+    		return;
+    		}
 		shapes.add(new NameShape(n, new Line2D.Double(x1, y1, x2, y2)));
+		System.out.println("Lines " + n + " has been created");
     	}
 	
 	public void group (String n, String[] nList) {
 		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
-		}
+    		System.out.println("Name already existed");
+    		return;
+    		}
 		if (isContainedGroup(n)){
-    		throw new IllegalArgumentException("This name already existed.");
-}
+    		System.out.println("Name already existed");
+    		return;
+    		}
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
 			for (int j = 0; j< shapes.size(); j++) {
@@ -172,6 +142,7 @@ public class Clevis {
 		}
 		groups.add(temp);
 		GroupCounter++;
+		System.out.println("Group " + n + " has been formed");
 	}
 	
 	public void ungroup (String n) {
@@ -185,6 +156,7 @@ public class Clevis {
 				break;
 			}
 		}
+		System.out.println("Group " + n + " has been ungrouped");
 	}
 	
 	public void delete (String n){
@@ -193,6 +165,7 @@ public class Clevis {
         	for (NameShape s: shapes){
             		if (s.getName()==n){
                 		shapes.remove(s);
+                		System.out.println("Shape " + n + " has been deleted");
                 		break;
             		}
         	}
@@ -201,6 +174,7 @@ public class Clevis {
                 		shapesID= g.shapes;
                 		groups.remove(g);
                 		isgroup=true;
+                		System.out.println("Group " + n + " has been deleted");
                 		break;
             		}
         	}
@@ -236,6 +210,8 @@ public class Clevis {
 		y = (float)boundbox.getY();
 		w = (float)boundbox.getWidth();
 		h = (float)boundbox.getHeight();
+		System.out.println("Boundingbox result :");
+		System.out.println(String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h));
 
 		return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
 	}
@@ -318,60 +294,61 @@ public class Clevis {
 	
 	public void list(String n){
 
-            Rectangle2D.Double recTemp = new Rectangle2D.Double();
-            Line2D.Double lineTemp = new Line2D.Double();
-            Ellipse2D.Double ellTemp = new Ellipse2D.Double();
+        Rectangle2D.Double recTemp = new Rectangle2D.Double();
+        Line2D.Double lineTemp = new Line2D.Double();
+        Ellipse2D.Double ellTemp = new Ellipse2D.Double();
 
-            boolean isgroup = false;
-            String groupname="";
-            List<NameShape> shapesID = new ArrayList<>();
-            for (Groups g : groups) {
-                if (g.getName() == n) {
-                    isgroup = true;
-                    shapesID = g.shapes;
-                    groupname=g.getName();
-                    break;
-                }
+        boolean isgroup = false;
+        String groupname="";
+        List<NameShape> shapesID = new ArrayList<>();
+        for (Groups g : groups) {
+            if (g.getName() == n) {
+                isgroup = true;
+                shapesID = g.shapes;
+                groupname=g.getName();
+                break;
             }
-                if (isgroup) {
-                    System.out.println("The name of the shape is: "+ groupname);
-                    System.out.println("The shapes in group are: ");
-                    for (NameShape sID : shapesID) {
-                        System.out.println(sID.getName());
-                    }
+        }
+            if (isgroup) {
+                System.out.println("The name of the shape is: "+ groupname);
+                System.out.println("The shapes in group are: ");
+                for (NameShape sID : shapesID) {
+                    System.out.println(sID.getName());
+                }
 
-                    }
-                 else {
-                    for (NameShape s : shapes) {
-                        if (s.getName() == n) {
-                            Shape temp = s.getShape();
-                            if (temp.getClass() == recTemp.getClass()) {
-                                recTemp = (Rectangle2D.Double) temp;
-                                System.out.println("The name of the shape is: "+s.getName());
-                                System.out.println("The width of the shape is:"+String.format("%.2f", recTemp.getWidth()));
-                                System.out.println("The height of the shape is:"+String.format("%.2f", recTemp.getHeight()));
-                            } else if (temp.getClass() == lineTemp.getClass()) {
-                                lineTemp = (Line2D.Double) temp;
-                                double x = lineTemp.getX1() - lineTemp.getX2();
-                                double y = lineTemp.getY1() - lineTemp.getY2();
-                                System.out.println("The name of the line is: "+s.getName());
-                                System.out.println("The length of the line is: "+String.format("%.2f",Math.sqrt(x * x + y * y)));
-                            } else if (temp.getClass() == ellTemp.getClass()) {
-                                ellTemp = (Ellipse2D.Double) temp;
-                                System.out.println("The name of the circle is: "+s.getName());
-                                System.out.println("The x of the centre of the circle is: "+String.format("%.2f",ellTemp.getX()+ellTemp.getWidth()/2));
-                                System.out.println("The y of the centre of the circle is: "+String.format("%.2f",ellTemp.getY()+ellTemp.getWidth()/2));
-                                System.out.println("The radius of the circle is: "+String.format("%.2f",ellTemp.getWidth()/2));
-                            }
-                            break;
+                }
+             else {
+                for (NameShape s : shapes) {
+                    if (s.getName() == n) {
+                        Shape temp = s.getShape();
+                        if (temp.getClass() == recTemp.getClass()) {
+                            recTemp = (Rectangle2D.Double) temp;
+                            System.out.println("The name of the shape is: "+s.getName());
+                            System.out.println("The width of the shape is:"+String.format("%.2f", recTemp.getWidth()));
+                            System.out.println("The height of the shape is:"+String.format("%.2f", recTemp.getHeight()));
+                        } else if (temp.getClass() == lineTemp.getClass()) {
+                            lineTemp = (Line2D.Double) temp;
+                            double x = lineTemp.getX1() - lineTemp.getX2();
+                            double y = lineTemp.getY1() - lineTemp.getY2();
+                            System.out.println("The name of the line is: "+s.getName());
+                            System.out.println("The length of the line is: "+String.format("%.2f",Math.sqrt(x * x + y * y)));
+                        } else if (temp.getClass() == ellTemp.getClass()) {
+                            ellTemp = (Ellipse2D.Double) temp;
+                            System.out.println("The name of the circle is: "+s.getName());
+                            System.out.println("The x of the centre of the circle is: "+String.format("%.2f",ellTemp.getX()+ellTemp.getWidth()/2));
+                            System.out.println("The y of the centre of the circle is: "+String.format("%.2f",ellTemp.getY()+ellTemp.getWidth()/2));
+                            System.out.println("The radius of the circle is: "+String.format("%.2f",ellTemp.getWidth()/2));
                         }
+                        break;
                     }
                 }
             }
+        }
 	
 	public void quit() {
 		System.exit(0);
 	}
+
 	
 	/*
 	//// Class used to define the shapes to be drawn
