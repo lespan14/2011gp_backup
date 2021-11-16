@@ -31,6 +31,7 @@ public class Application{
 			String[] tokens = input.split("\\s+");
 			command = tokens[0];
 			logger.WriteLog(input);
+			try {
 			switch (command) {
 			case "rectangle" :
 				String recname = tokens[1];
@@ -67,11 +68,12 @@ public class Application{
 				String grname = tokens[1];
 				int i =3;
 				String [] nList = {tokens[2]};
-				while (tokens[i] != null) {
+				while (i < tokens.length) {
 					String [] tempList = new String[nList.length+1];
 					tempList = nList.clone();
 					tempList[tempList.length-1] = tokens[i];
 					nList = tempList;
+					i++;
 				}
 				clevis.group(grname, nList);
 				break;
@@ -102,6 +104,9 @@ public class Application{
 				String liname = tokens[1];
 				clevis.list(liname);
 				break;
+			case "listAll" :
+				clevis.listAll();
+				break;
 			case "quit" :
 				clevis.quit();
 				break;
@@ -109,6 +114,9 @@ public class Application{
 				System.out.println("Invalid input, please input again\n");
 				break;
 				
+			}
+			} catch (Exception e){
+				System.out.println("An error has been detected, please input again");
 			}
 			
 		}
@@ -122,16 +130,7 @@ public class Application{
 		System.out.print(">_");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
     /*
     private void inital() {
