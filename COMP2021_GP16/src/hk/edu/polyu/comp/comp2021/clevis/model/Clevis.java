@@ -315,7 +315,10 @@ public class Clevis {
 		}
 		
 	}
-
+	
+	public void quit() {
+		System.exit(0);
+	}
 	
 	/*
 	//// Class used to define the shapes to be drawn
