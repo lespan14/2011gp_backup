@@ -111,7 +111,7 @@ public class Application{
 				clevis.quit();
 				break;
 			default :
-				System.out.println("Invalid input, please input again\n");
+				System.out.println("Invalid input, please input again");
 				break;
 				
 			}
