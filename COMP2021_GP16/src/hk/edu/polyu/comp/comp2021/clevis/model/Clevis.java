@@ -17,51 +17,7 @@ import javax.swing.JPanel;
 public class Clevis {
 	
 	private static int GroupCounter = 0;
-	/*
-	public JFrame frame;
-	public Canvas canvas;
-	private String title;
-	private int width;
-	private int height;
-	public Clevis(){
-    	this.frame = new JFrame();	
-    	this.canvas = new Canvas();
-    	this.width = 500;
-    	this.height = 800;
-    	this.title = "Testing";
-    	init();
-	}
-	
-    public Clevis(String title, int width, int height){
-    	this.frame = new JFrame();	
-    	this.canvas = new Canvas();
-    	this.width = width;
-    	this.height = height;
-    	this.title = title;
-    	init();
-    	}
-    
-    public void init() {
-    	this.frame.setTitle(title);
-    	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	this.frame.setSize(width,height);
-    	this.frame.setLocationRelativeTo(null);
-    	this.frame.setResizable(false);
-    	this.frame.setVisible(true);
-    	
-    	//JPanel pan = new JPanel();
-    	//pan.setLayout(new FlowLayout(FlowLayout.CENTER, 200,200));
-    	//pan.setBackground(Color.BLACK);
-    	//this.frame.add(pan,BorderLayout.NORTH);
-    	this.canvas.setBackground(Color.WHITE);
-    	this.canvas.setPreferredSize(new Dimension(width,height));
-    	this.canvas.setMaximumSize(new Dimension(width,height));
-    	this.canvas.setMinimumSize(new Dimension(width,height));
-    	this.frame.add(canvas);
-    	this.frame.pack();
-    }
-    */
-	
+
 	public static class NameShape {
             private String name;
             private Shape shape;
@@ -79,13 +35,20 @@ public class Clevis {
         	this.groupID = ID;}
         
         public void ungrouped(){grouped = false;}
-	
+	}
 	public boolean isContained(String n){
 		for (NameShape s:shapes){
 			return s.getName()==n;
 		}
 		return false;
-    	}
+    }
+	
+	public boolean isContainedGroup(String n){
+		for (Groups s:groups){
+			return s.getName()==n;
+		}
+		return false;
+    }
 	
 	public static class Groups {
         private String name;
@@ -96,31 +59,28 @@ public class Clevis {
         	this.groupID = groupID;
         }
         
-    public void add(NameShape adder) {
-        this.shapes.add(adder);
-    }
-    public void remove(NameShape adder) {
-    	this.shapes.remove(adder);
-    }
-    public String getName() {
-    	return this.name;
-    }
-    public int getID() {
-    	return this.groupID;
-    }
-	
-}
-	
+	    public void add(NameShape adder) {
+	        this.shapes.add(adder);
+	    }
+	    public void remove(NameShape adder) {
+	    	this.shapes.remove(adder);
+	    }
+	    public String getName() {
+	    	return this.name;
+	    }
+	    public int getID() {
+	    	return this.groupID;
+	    }
+		
+	}
+		
 	public List<Groups> groups = new ArrayList<>();
 	public List<NameShape> shapes= new ArrayList<>();
 	
 	public void rectangle (String n, double x, double y, double w, double h){
         	// g.drawRect(x, y, w, h);
-		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
-		}
 		shapes.add(new NameShape(n, new Rectangle2D.Double(x, y, w, h)));
-    	}
+    }
 
 	public void circle (String n, double x, double y, double r){
         	// g.drawOval(x, y, r, r);
@@ -148,7 +108,10 @@ public class Clevis {
 	
 	public void group (String n, String[] nList) {
 		if (isContained(n)){
-            		throw new IllegalArgumentException("This name already existed.");
+            throw new IllegalArgumentException("This name already existed.");
+		}
+		if (isContainedGroup(n)) {
+			throw new IllegalArgumentException("This name already existed.");
 		}
 		Groups temp = new Groups(n, GroupCounter);
 		for (String i : nList) {
@@ -165,6 +128,9 @@ public class Clevis {
 	}
 	
 	public void ungroup (String n) {
+		if (!isContainedGroup(n)) {
+			throw new IllegalArgumentException("Given group doesn't exist.");
+		}
 		for (int i = 0; i < groups.size(); i++) {
 			if (groups.get(i).getName() == n) {
 				Groups temp = groups.get(i);
@@ -328,5 +294,6 @@ public class Clevis {
 	}
 	*/
 }
+
 //ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
 // https://xiu2.net/it/details/6102e2b679193629343164a5
