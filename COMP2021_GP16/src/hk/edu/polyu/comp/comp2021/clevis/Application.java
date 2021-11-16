@@ -98,6 +98,10 @@ public class Application{
 				String iname2 = tokens[2];
 				clevis.intersect(iname1, iname2);
 				break;
+			case "list" :
+				String liname = tokens[1];
+				clevis.list(liname);
+				break;
 			case "quit" :
 				clevis.quit();
 				break;
