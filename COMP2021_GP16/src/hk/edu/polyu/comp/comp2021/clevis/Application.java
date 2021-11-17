@@ -140,7 +140,7 @@ public class Application{
         System.out.println("X and Y coordinates for circle, square and rectangle represent the top left corner of the shape.");
         System.out.println("\nInput format:");
         System.out.println("To add a circle:                          circle [name] [X] [Y] [radius]");
-        System.out.println("To add a square:                          square [name] [X] [Y] [width] [height]");
+        System.out.println("To add a square:                          square [name] [X] [Y] [width]");
         System.out.println("To add a rectangle:                       rectangle [name] [X] [Y] [width] [height]");
         System.out.println("To add a line:                            line [name] [X1] [Y1] [X2] [Y2]");
         System.out.println("To group shapes:                          group [name of group] [name of shape1] [name of shape2]...");
