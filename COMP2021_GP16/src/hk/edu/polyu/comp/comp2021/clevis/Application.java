@@ -95,6 +95,12 @@ public class Application{
 				Double dy =  Double.parseDouble(tokens[3]);
 				clevis.move(movname, dx, dy);
 				break;
+			case "pickandmove" :
+				Double pmx =  Double.parseDouble(tokens[1]);
+				Double pmy =  Double.parseDouble(tokens[2]);
+				Double pmdx =  Double.parseDouble(tokens[3]);
+				Double pmdy =  Double.parseDouble(tokens[4]);
+				clevis.pickandmove(pmx,pmy,pmdx,pmdy);
 			case "intersect" :
 				String iname1 = tokens[1];
 				String iname2 = tokens[2];
