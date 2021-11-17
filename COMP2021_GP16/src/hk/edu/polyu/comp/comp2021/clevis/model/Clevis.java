@@ -59,6 +59,7 @@ public class Clevis {
         private String name;
         private int groupID;
         private List<NameShape> shapes= new ArrayList<>();
+        private Area groupshape = new Area();
         public Groups(String name, int groupID){
             this.name = name;
             this.groupID = groupID;
@@ -75,6 +76,9 @@ public class Clevis {
         }
         public int getID() {
             return this.groupID;
+        }
+        public Area getShape() {
+            return this.groupshape;
         }
 
     }
@@ -133,12 +137,12 @@ public class Clevis {
                 if (shapes.get(j).getName().equals(i)) {
                     temp.add(shapes.get(j));
                     shapes.get(j).grouped(GroupCounter);
+                    temp.groupshape.add(new Area(shapes.get(j).getShape()));
                     break;
                 }
             }
         }
-        NameShape groupinshape=new NameShape(n,null);
-        shapes.add(groupinshape);
+        shapes.add(new NameShape(n,null));
         groups.add(temp);
         GroupCounter++;
         System.out.println("Group " + n + " has been formed");
@@ -211,24 +215,47 @@ public class Clevis {
         }
 
         NameShape Shape = null;
+        Area Group = null;
+        boolean isgroup = false;
         double x;
         double y;
         double w;
         double h;
-
-        for (int i = 0; i < shapes.size(); i++) {
-            if (shapes.get(i).getName().equals(n)) {
-                Shape = shapes.get(i);
-                break;
+        if (isContainedGroup(n)){
+            for (int i = 0; i < groups.size(); i++) {
+                if (groups.get(i).getName().equals(n)) {
+                    Group = groups.get(i).getShape();
+                    isgroup = true;
+                    break;
+                }
             }
         }
+        else {
+            for (int i = 0; i < shapes.size(); i++) {
+                if (shapes.get(i).getName().equals(n)) {
+                    Shape = shapes.get(i);
+                    break;
+                }
+            }
+        }
+        if (isgroup) {
+            Rectangle2D boundbox = Group.getBounds2D();
 
-        Rectangle2D boundbox = Shape.getShape().getBounds2D();
+            x = boundbox.getX();
+            y = boundbox.getY();
+            w = boundbox.getWidth();
+            h = boundbox.getHeight();
+        }
 
-        x = boundbox.getX();
-        y = boundbox.getY();
-        w = boundbox.getWidth();
-        h = boundbox.getHeight();
+        else{
+
+            Rectangle2D boundbox = Shape.getShape().getBounds2D();
+
+            x = boundbox.getX();
+            y = boundbox.getY();
+            w = boundbox.getWidth();
+            h = boundbox.getHeight();
+        }
         System.out.println("Boundingbox result :");
         System.out.println(String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h));
 
