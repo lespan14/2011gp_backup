@@ -23,6 +23,7 @@ public class Application{
 		clevis = new Clevis();
 		logger = new Log(html, filename);
 		Scanner console = new Scanner(System.in);
+		instruction();
 		while (true) {
 			menu();
 			String input = "";
@@ -136,8 +137,27 @@ public class Application{
 		System.out.print(">_");
 	}
 	
-
-
+	private static void instruction() {
+        System.out.println("Reminders:");
+        System.out.println("Please change the value in [] and separate each value inputted by a space.");
+        System.out.println("X and Y coordinates for circle, square and rectangle represent the top left corner of the shape.");
+        System.out.println("\nInput format:");
+        System.out.println("To add a circle:                          circle [name] [X] [Y] [radius]");
+        System.out.println("To add a square:                          square [name] [X] [Y] [width] [height]");
+        System.out.println("To add a rectangle:                       rectangle [name] [X] [Y] [width] [height]");
+        System.out.println("To add a line:                            line [name] [X1] [Y1] [X2] [Y2]");
+        System.out.println("To group shapes:                          group [name of group] [name of shape1] [name of shape2]...");
+        System.out.println("To ungroup shapes:                        ungroup [name of group]");
+        System.out.println("To delete a shape:                        delete [name]");
+        System.out.println("To check minimum bounding box of a shape: boundingbox [name]");
+        System.out.println("To move a shape:                          move [name] [horizontal distance] [vertical distance]");
+        System.out.println("To check whether two shapes intersect:    intersect [name of shape1] [name of shape2]");
+        System.out.println("To check information of a shape:          list [name]");
+        System.out.println("To check information of all shapes:       listAll");
+        System.out.println("To terminate the program:                 quit");
+        System.out.println();
+    }
+	
     /*
     private void inital() {
     	
