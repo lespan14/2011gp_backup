@@ -151,6 +151,7 @@ public class Application{
         System.out.println("To delete a shape:                        delete [name]");
         System.out.println("To check minimum bounding box of a shape: boundingbox [name]");
         System.out.println("To move a shape:                          move [name] [horizontal distance] [vertical distance]");
+	System.out.println("To move the newest shape at point x,y:    pickandmove [x] [y] [horizontal distance] [vertical distance]");
         System.out.println("To check whether two shapes intersect:    intersect [name of shape1] [name of shape2]");
         System.out.println("To check information of a shape:          list [name]");
         System.out.println("To check information of all shapes:       listAll");
