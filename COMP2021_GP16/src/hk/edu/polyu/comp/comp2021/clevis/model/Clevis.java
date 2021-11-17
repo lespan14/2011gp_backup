@@ -331,7 +331,11 @@ public class Clevis {
         }
         else {
             for (NameShape s: shapes){
-                if (s.getName().equals(n) && s.grouped == false){
+                if (s.grouped){
+                        System.out.println("cannot move a shape in group");
+                        return;
+                }
+                else if (s.getName().equals(n)){
                     System.out.println("shape found");
                     Shape temp = s.getShape();
                     if (temp.getClass() == recTemp.getClass()) {
