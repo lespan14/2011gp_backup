@@ -67,13 +67,10 @@ public class Application{
 				break;
 			case "group" :
 				String grname = tokens[1];
-				int i =3;
-				String [] nList = {tokens[2]};
+				int i =2;
+				String [] nList = new String[tokens.length-2];
 				while (i < tokens.length) {
-					String [] tempList = new String[nList.length+1];
-					tempList = nList.clone();
-					tempList[tempList.length-1] = tokens[i];
-					nList = tempList;
+					nList[i-2] = tokens[i];
 					i++;
 				}
 				clevis.group(grname, nList);
@@ -159,62 +156,4 @@ public class Application{
         System.out.println();
     }
 	
-    /*
-    private void inital() {
-    	
-    }
-    
-    private void tick() {
-    	
-    }
-    
-    private void render() {
-    	BufferStrategy bs = clevis.canvas.getBufferStrategy();
-    	if (bs == null) {
-    		clevis.canvas.createBufferStrategy(3);
-    		return;
-    	}
-    	g = bs.getDrawGraphics();
-    	
-    	g.clearRect(10, 0, 500, 400);
-    	
-    	//drawing currently performed here.
-    	//move this to clevis class for easier management
-    	// g.drawRect(10, 10, 50, 70);
-    	// Clevis.paint(g);
-	    
-    	bs.show();
-    	g.dispose();
-    }
-    
-    public void run() {
-    	
-    	inital();
-    	
-    	while(running) {
-    		tick();
-    		render();
-    	}
-    	
-    	stop();
-    }
-    
-    public synchronized void start() {
-    	if(running) return;
-    	running = true;
-    	thread = new Thread(this);
-    	thread.start();
-    }
-    
-    public synchronized void stop() {
-    	if (!running) return;
-    	running = false;
-    	try {
-    		thread.join();
-    	}
-    	catch (InterruptedException e) {
-    		e.printStackTrace();
-    	}
-    }
-    */
 }
