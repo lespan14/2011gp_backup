@@ -382,12 +382,15 @@ public class Clevis {
                         System.out.println("The name of the shape is: "+s.getName());
                         System.out.println("The width of the shape is: "+String.format("%.2f", recTemp.getWidth()));
                         System.out.println("The height of the shape is: "+String.format("%.2f", recTemp.getHeight()));
+                        System.out.println("The X and Y of the shape is: "+String.format("%.2f", recTemp.getX()) + " " + String.format("%.2f", recTemp.getY()));
                     } else if (temp.getClass() == lineTemp.getClass()) {
                         lineTemp = (Line2D.Double) temp;
                         double x = lineTemp.getX1() - lineTemp.getX2();
                         double y = lineTemp.getY1() - lineTemp.getY2();
                         System.out.println("The name of the line is: "+s.getName());
                         System.out.println("The length of the line is: "+String.format("%.2f",Math.sqrt(x * x + y * y)));
+                        System.out.println("The X1 and Y1 of the line is: "+String.format("%.2f",lineTemp.getX1())+" " + String.format("%.2f",lineTemp.getY1()));
+                        System.out.println("The X2 and Y2 of the line is: "+String.format("%.2f",lineTemp.getX2())+" " + String.format("%.2f",lineTemp.getY2()));
                     } else if (temp.getClass() == ellTemp.getClass()) {
                         ellTemp = (Ellipse2D.Double) temp;
                         System.out.println("The name of the circle is: "+s.getName());
@@ -420,24 +423,6 @@ public class Clevis {
         System.exit(0);
     }
 
-	/*
-	//// Class used to define the shapes to be drawn
-	public void paint(Graphics g){
-        	ArrayList<Color> shapeStroke = new ArrayList<Color>();
-        	Graphics2D graphSettings = (Graphics2D) g;
-        	// Defines the line width of the stroke
-        	graphSettings.setStroke(new BasicStroke(2));
-        	// Iterators created to cycle through strokes and fills
-        	Iterator<Color> strokeCounter = shapeStroke.iterator();
-        	shapeStroke.add(Color.GREEN);
-
-        	for (NameShape s: shapes){
-            	graphSettings.setPaint(strokeCounter.next());
-            	graphSettings.draw(s.getShape());
-        	}
-
-	}
-	*/
 }
 //ref: https://stackoverflow.com/questions/28839765/how-do-i-create-an-object-of-an-arraylist-shape-in-java
 // https://xiu2.net/it/details/6102e2b679193629343164a5
