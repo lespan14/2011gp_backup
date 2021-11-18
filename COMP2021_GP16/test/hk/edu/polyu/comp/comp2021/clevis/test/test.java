@@ -147,7 +147,7 @@ class test {
 		assertFalse(clevis.isContained(n2));
 	}
 
-	@Test
+	Test
 	void testboundingbox() {
 		clevis.rectangle(n1, 3, 3, 1, 1);
 		clevis.square(n2, 3, 3, 1);
