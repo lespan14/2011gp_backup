@@ -188,7 +188,9 @@ public class Clevis {
         for (NameShape s: shapes){
             if (s.getName().equals(n) && s.grouped == false &&s.shape!=null){
                 shapes.remove(s);
-                System.out.println("Shape " + n + " has been deleted");
+                if (!isContainedGroup(s.getName())) {
+                    System.out.println("Shape " + n + " has been deleted");
+                }
                 break;
             }
         }
