@@ -13,13 +13,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class test {
-	Clevis clevis = new Clevis();
-    Clevis.NameShape t1;
-    Clevis.NameShape t2;
-    Clevis.Groups g1;
-    String n1;
-    String n2;
-    String n3;
+    	Clevis clevis = new Clevis();
+    	Clevis.NameShape t1;
+	Clevis.NameShape t2;
+    	Clevis.Groups g1;
+    	String n1;
+    	String n2;
+    	String n3;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		n1 = "n1";
@@ -117,6 +118,15 @@ class test {
 		assertTrue(temp.getY1() == s1.getY1());
 		assertTrue(temp.getY2() == s1.getY2());
 	}
+	
+	@Test
+    	void testIntersect() {
+        	clevis.rectangle(n1, 3, 3, 1, 1);
+        	clevis.rectangle(n2, 3, 3, 10, 9);
+        	clevis.rectangle(n3, 100, 100, 1, 1);
+        	assertTrue(clevis.intersect(n1,n2));
+       	 	assertFalse(clevis.intersect(n1,n3));
+    	}
 	
 	@Test
 	void testMove() {
