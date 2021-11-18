@@ -153,12 +153,15 @@ class test {
 	}
 	
 	@Test
-	void testDelete() {
+	void testDelete1() {
 		clevis.rectangle(n1, 3, 3, 1, 1);
 		assertTrue(clevis.isContained(n1));
 		clevis.delete(n1);
 		assertFalse(clevis.isContained(n1));
-		
+	}
+	
+	@Test
+	void testDelete2() {
 		clevis.rectangle(n1, 3, 3, 1, 1);
 		clevis.circle(n2, 4, 4, 4);
 		String [] nList = {n1, n2};
