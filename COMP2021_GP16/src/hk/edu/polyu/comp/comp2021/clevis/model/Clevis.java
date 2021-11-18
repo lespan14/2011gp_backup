@@ -127,6 +127,10 @@ public class Clevis {
             System.out.println("Name already existed");
             return;
         }
+       if (nList.length<=1){
+            System.out.println("two or more shapes should be selected to form group");
+            return;
+        }
         Groups temp = new Groups(n, GroupCounter);
         for (String i : nList) {
             if (!isContained(i)){
