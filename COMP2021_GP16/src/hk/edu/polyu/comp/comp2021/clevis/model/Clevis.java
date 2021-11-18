@@ -142,7 +142,7 @@ public class Clevis {
                 }
             }
         }
-        shapes.add(new NameShape(n,null));
+        shapes.add(new NameShape(n,temp.groupshape));
         groups.add(temp);
         GroupCounter++;
         System.out.println("Group " + n + " has been formed");
@@ -174,12 +174,13 @@ public class Clevis {
     }
 
     public void delete (String n){
+        boolean isgroup=false;
+        List<NameShape> shapesID= new ArrayList<>();
+        
         if (!isContained(n)){
             System.out.println("Shape does not exist");
             return;
         }
-        boolean isgroup=false;
-        List<NameShape> shapesID= new ArrayList<>();
         for (NameShape s: shapes){
             if (s.getName().equals(n) && s.grouped == false &&s.shape!=null){
                 shapes.remove(s);
@@ -189,9 +190,10 @@ public class Clevis {
         }
         for (Groups g: groups){
             if (g.getName().equals(n)){
+                isgroup=true;
                 shapesID= g.shapes;
                 groups.remove(g);
-                isgroup=true;
+                shapes.remove(g);
                 System.out.println("Group " + n + " has been deleted");
                 break;
             }
@@ -201,6 +203,7 @@ public class Clevis {
                 for (NameShape s: shapes){
                     if (s.getName().equals(sID.getName())){
                         shapes.remove(s);
+                        System.out.println("Shape " + s.getName() + " has been deleted");
                         break;
                     }
                 }
@@ -216,7 +219,6 @@ public class Clevis {
 
         NameShape Shape = null;
         Area Group = null;
-        boolean isgroup = false;
         double x;
         double y;
         double w;
@@ -225,10 +227,15 @@ public class Clevis {
             for (int i = 0; i < groups.size(); i++) {
                 if (groups.get(i).getName().equals(n)) {
                     Group = groups.get(i).getShape();
-                    isgroup = true;
                     break;
                 }
             }
+            Rectangle2D boundbox = Group.getBounds2D();
+
+            x = boundbox.getX();
+            y = boundbox.getY();
+            w = boundbox.getWidth();
+            h = boundbox.getHeight();
         }
         else {
             for (int i = 0; i < shapes.size(); i++) {
@@ -237,9 +244,7 @@ public class Clevis {
                     break;
                 }
             }
-        }
-        if (isgroup) {
-            Rectangle2D boundbox = Group.getBounds2D();
+             Rectangle2D boundbox = Shape.getShape().getBounds2D();
 
             x = boundbox.getX();
             y = boundbox.getY();
@@ -247,15 +252,6 @@ public class Clevis {
             h = boundbox.getHeight();
         }
 
-        else{
-
-            Rectangle2D boundbox = Shape.getShape().getBounds2D();
-
-            x = boundbox.getX();
-            y = boundbox.getY();
-            w = boundbox.getWidth();
-            h = boundbox.getHeight();
-        }
         System.out.println("Boundingbox result :");
         System.out.println(String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h));
 
@@ -302,6 +298,7 @@ public class Clevis {
 
         boolean isgroup = false;
         List<NameShape> shapesID = null;
+        Area atemp=new Area();
         for (Groups g:groups) {
             if (g.getName().equals(n)) {
                 isgroup = true;
@@ -314,28 +311,33 @@ public class Clevis {
             for (NameShape sID : shapesID) {
                 Shape temp = sID.getShape();
                 if (temp.getClass() == recTemp.getClass()) {
-                    recTemp = (Rectangle2D.Double)temp;
-                    recTemp.setRect(recTemp.getX() +dx, recTemp.getY()+dy, recTemp.getWidth(), recTemp.getHeight());
+                    recTemp = (Rectangle2D.Double) temp;
+                    recTemp.setRect(recTemp.getX() + dx, recTemp.getY() + dy, recTemp.getWidth(), recTemp.getHeight());
+                    atemp.add(new Area(recTemp));
+                } else if (temp.getClass() == lineTemp.getClass()) {
+                    lineTemp = (Line2D.Double) temp;
+                    lineTemp.setLine(lineTemp.getX1() + dx, lineTemp.getY1() + dy, lineTemp.getX2() + dx, lineTemp.getY2() + dy);
+                    atemp.add(new Area(lineTemp));
+                } else if (temp.getClass() == ellTemp.getClass()) {
+                    ellTemp = (Ellipse2D.Double) temp;
+                    ellTemp.setFrame(ellTemp.getX() + dx, ellTemp.getY() + dy, ellTemp.getWidth(), ellTemp.getHeight());
+                    atemp.add(new Area(ellTemp));
                 }
-                else if (temp.getClass() == lineTemp.getClass()) {
-                    lineTemp = (Line2D.Double)temp;
-                    lineTemp.setLine(lineTemp.getX1()+dx, lineTemp.getY1()+dy, lineTemp.getX2()+dx, lineTemp.getY2()+dy);
+                System.out.println("Shape " + sID.getName() + " moved");
+                for (Groups g : groups) {
+                    if (g.getName().equals(n)) {
+                        g.groupshape = atemp;
+                    }
                 }
-                else if (temp.getClass() == ellTemp.getClass()) {
-                    ellTemp = (Ellipse2D.Double)temp;
-                    ellTemp.setFrame(ellTemp.getX()+dx, ellTemp.getY()+dy, ellTemp.getWidth(), ellTemp.getHeight());
-                }
-                System.out.println("Shape " + sID.getName() +" moved");
             }
-
         }
         else {
             for (NameShape s: shapes){
-                if (s.grouped){
+               if (s.getName().equals(n)){
+                   if (s.grouped){
                         System.out.println("cannot move a shape in group");
                         return;
-                }
-                else if (s.getName().equals(n)){
+                    }
                     System.out.println("shape found");
                     Shape temp = s.getShape();
                     if (temp.getClass() == recTemp.getClass()) {
