@@ -13,13 +13,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class test {
-	Clevis clevis = new Clevis();
-    Clevis.NameShape t1;
-    Clevis.NameShape t2;
-    Clevis.Groups g1;
-    String n1;
-    String n2;
-    String n3;
+    	Clevis clevis = new Clevis();
+    	Clevis.NameShape t1;
+	Clevis.NameShape t2;
+    	Clevis.Groups g1;
+    	String n1;
+    	String n2;
+    	String n3;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		n1 = "n1";
@@ -52,7 +53,7 @@ class test {
 		String [] nList = {n1, n2};
 		clevis.group(n3, nList);
 		g1.add(t2);
-		assertTrue(g1.getID() == clevis.groups.get(0).getID());
+		assertTrue(clevis.shapes.get(0).getID() == clevis.shapes.get(1).getID());
 		assertTrue(g1.getName().equals(clevis.groups.get(0).getName()));
 	}
 	
@@ -119,12 +120,36 @@ class test {
 	}
 	
 	@Test
+    	void testIntersect() {
+        	clevis.rectangle(n1, 3, 3, 1, 1);
+        	clevis.rectangle(n2, 3, 3, 10, 9);
+        	clevis.rectangle(n3, 100, 100, 1, 1);
+        	assertTrue(clevis.intersect(n1,n2));
+       	 	assertFalse(clevis.intersect(n1,n3));
+    	}
+	
+	@Test
 	void testMove() {
 		Shape s1 = new Rectangle2D.Double(3, 3, 1, 1);
 		clevis.rectangle(n1, 5, 5, 1, 1);
 		clevis.move(n1, -2, -2);
 		Shape temp = clevis.shapes.get(0).getShape();
 		assertTrue(temp.equals(s1));
+	}
+	
+	@Test
+	void testMove2() {
+		Shape s1 = new Rectangle2D.Double(3, 3, 1, 1);
+		Shape s2 = new Rectangle2D.Double(2, 5, 1, 1);
+		clevis.rectangle(n1, 5, 5, 1, 1);
+		clevis.rectangle(n2, 4, 7, 1, 1);
+		String [] nList = {n1, n2};
+		clevis.group(n3, nList);
+		clevis.move(n3, -2, -2);
+		Shape temp = clevis.shapes.get(0).getShape();
+		assertTrue(temp.equals(s1));
+		temp = clevis.shapes.get(1).getShape();
+		assertTrue(temp.equals(s2));
 	}
 	
 	@Test

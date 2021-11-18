@@ -35,6 +35,7 @@ public class Clevis {
             this.groupID = ID;}
 
         public void ungrouped(){grouped = false;}
+        public int getID() {return groupID;}
     }
     public boolean isContained(String n){
 
