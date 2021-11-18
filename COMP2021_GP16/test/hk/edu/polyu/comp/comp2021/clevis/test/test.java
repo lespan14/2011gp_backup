@@ -104,6 +104,22 @@ class test {
 		assertTrue(temp.getY2() == s1.getY2());
 	}
 	
+	@Test
+	void testMove() {
+		Shape s1 = new Rectangle2D.Double(3, 3, 1, 1);
+		clevis.rectangle(n1, 5, 5, 1, 1);
+		clevis.move(n1, -2, -2);
+		Shape temp = clevis.shapes.get(0).getShape();
+		assertTrue(temp.equals(s1));
+	}
 	
+	@Test
+	void testDelete() {
+		clevis.rectangle(n1, 3, 3, 1, 1);
+		assertTrue(clevis.isContained(n1));
+		clevis.delete(n1);
+		assertFalse(clevis.isContained(n1));
+	}
 
+	
 }
