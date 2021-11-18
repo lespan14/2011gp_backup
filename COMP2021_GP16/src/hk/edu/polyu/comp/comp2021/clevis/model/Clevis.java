@@ -128,7 +128,7 @@ public class Clevis {
             return;
         }
        if (nList.length<=1){
-            System.out.println("two or more shapes should be selected to form group");
+            System.out.println("Two or more shapes should be selected to form group");
             return;
         }
         Groups temp = new Groups(n, GroupCounter);
@@ -309,7 +309,7 @@ public class Clevis {
             if (g.getName().equals(n)) {
                 isgroup = true;
                 shapesID= g.shapes;
-                System.out.println("group found");
+                System.out.println("Group found");
                 break;
             }
         }
@@ -381,7 +381,7 @@ public class Clevis {
 
     public void list(String n){
         if (!isContained(n)){
-            System.out.println("shape does not exist");
+            System.out.println("Shape does not exist");
             return;
         }
 
@@ -402,7 +402,7 @@ public class Clevis {
         }
         if (isgroup) {
             System.out.println("The name of the shape is: "+ groupname);
-            System.out.println("The shapes in group are: ");
+            System.out.println("The shapes in group "+groupname+" are: ");
             for (NameShape sID : shapesID) {
                 System.out.println("        "+sID.getName());
             }
@@ -450,7 +450,7 @@ public class Clevis {
             System.out.println();
         }
 
-        System.out.println("------------");
+        System.out.println("------------------------");
     }
 
     public void quit() {
