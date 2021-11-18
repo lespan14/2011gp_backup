@@ -156,16 +156,24 @@ class test {
 	@Test
 	void testMove2() {
 		Shape s1 = new Rectangle2D.Double(3, 3, 1, 1);
-		Shape s2 = new Rectangle2D.Double(2, 5, 1, 1);
-		clevis.rectangle(n1, 5, 5, 1, 1);
-		clevis.rectangle(n2, 4, 7, 1, 1);
-		String [] nList = {n1, n2};
-		clevis.group(n3, nList);
-		clevis.move(n3, -2, -2);
-		Shape temp = clevis.shapes.get(0).getShape();
-		assertTrue(temp.equals(s1));
-		temp = clevis.shapes.get(1).getShape();
-		assertTrue(temp.equals(s2));
+        	Line2D.Double s2 = new Line2D.Double(2,2,2,2);
+        	Shape s3 = new Ellipse2D.Double(-1,0,5,5);
+        	clevis.rectangle(n1, 5, 5, 1, 1);
+        	clevis.line(n2, 4,4,4,4);
+        	clevis.circle(n4, 1,2,5);
+
+        	String [] nList = {n1, n2, n4};
+        	clevis.group(n3, nList);
+        	clevis.move(n3, -2, -2);
+        	Shape temp1 = clevis.shapes.get(0).getShape();
+        	Line2D.Double temp2 = (Line2D.Double)clevis.shapes.get(1).getShape();
+		Shape temp3 = clevis.shapes.get(2).getShape();
+        	assertTrue(temp1.equals(s1));
+        	assertTrue(temp2.getX1() == s2.getX1());
+        	assertTrue(temp2.getX2() == s2.getX2());
+        	assertTrue(temp2.getY1() == s2.getY1());
+        	assertTrue(temp2.getY2() == s2.getY2());
+        	assertTrue(temp3.equals(s3));
 	}
 	
 	@Test
