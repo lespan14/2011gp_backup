@@ -69,9 +69,6 @@ public class Clevis {
         public void add(NameShape adder) {
             this.shapes.add(adder);
         }
-        public void remove(NameShape adder) {
-            this.shapes.remove(adder);
-        }
         public String getName() {
             return this.name;
         }
