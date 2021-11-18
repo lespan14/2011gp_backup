@@ -133,6 +133,18 @@ class test {
 		assertTrue(clevis.isContained(n1));
 		clevis.delete(n1);
 		assertFalse(clevis.isContained(n1));
+		
+		clevis.rectangle(n1, 3, 3, 1, 1);
+		clevis.circle(n2, 4, 4, 4);
+		String [] nList = {n1, n2};
+		clevis.group(n3, nList);
+		assertTrue(clevis.isContainedGroup(n3));
+		assertTrue(clevis.isContained(n1));
+		assertTrue(clevis.isContained(n2));
+		clevis.delete(n3);
+		assertFalse(clevis.isContainedGroup(n3));
+		assertFalse(clevis.isContained(n1));
+		assertFalse(clevis.isContained(n2));
 	}
 
 	@Test
