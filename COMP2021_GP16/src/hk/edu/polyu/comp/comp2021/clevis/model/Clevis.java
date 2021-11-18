@@ -360,21 +360,17 @@ public class Clevis {
     }
 
     public void pickandmove (double x , double y, double dx, double dy){ //need fix
-
         Line2D dot = new Line2D.Double(x, y, x, y);
-
         Area areaA = new Area(dot);
-        Shape b = null;
-        for (NameShape s: shapes){
-            b = s.getShape();
-            areaA.intersect(new Area(b));
+        for (int i=shapes.size()-1;i>=0;i--){
+            areaA.intersect(new Area(shapes.get(i).getShape()));
             if (!areaA.isEmpty()){
-                move(s.getName(),dx,dy);
-                break;
-            }else {
-                System.out.println("Nothing in " + x +"," + y);
+                System.out.println(shapes.get(i).getName()+" is at "+x+", "+y);
+                move(shapes.get(i).getName(),dx,dy);
+                return;
             }
         }
+        System.out.println("Nothing in " + x +", " + y);
     }
 
     public void list(String n){
