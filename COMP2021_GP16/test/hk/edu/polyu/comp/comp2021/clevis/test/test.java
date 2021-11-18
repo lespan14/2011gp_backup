@@ -56,6 +56,21 @@ class test {
 		assertTrue(g1.getName().equals(clevis.groups.get(0).getName()));
 	}
 	
+	@Test
+    	void testUngroup1() {
+        	clevis.ungroup(n3);
+        	assertTrue(!clevis.isContained(n3));
+   	}
+
+    	@Test
+    	void testUngroup2() {
+        	clevis.rectangle(n1, 3, 3, 1, 1);
+        	clevis.rectangle(n2, 2, 5, 1, 1);
+       	 	String [] nList = {n1, n2};
+        	clevis.group(n3, nList);
+        	clevis.ungroup(n3);
+        	assertTrue(!clevis.isContained(n3));
+    	}
 	
 	@Test
 	void testIsContain() {
@@ -68,7 +83,6 @@ class test {
 		clevis.groups.add(g1);
 		assertTrue(clevis.isContainedGroup("g1"));
 	}
-	
 	
 	@Test
 	void testRec() {
