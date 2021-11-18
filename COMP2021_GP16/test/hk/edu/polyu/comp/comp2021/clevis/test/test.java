@@ -178,7 +178,7 @@ class test {
 	}
 
 	@Test
-	void testboundingbox1() {
+	void testBoundingbox1() {
 		clevis.rectangle(n1, 3, 3, 1, 1);
 		clevis.square(n2, 3, 3, 1);
 		String s1 = clevis.boundingbox(n1);
@@ -187,7 +187,7 @@ class test {
 	}
 
 	@Test
-    	void testboundingbox2() {
+    	void testBoundingbox2() {
         	clevis.square(n1, 4, 3, 1);
         	clevis.square(n2, 3, 3, 1);
         	clevis.rectangle(n3, 3, 3, 2,1);
@@ -196,5 +196,15 @@ class test {
         	String s1 = clevis.boundingbox(n3);
         	String s2 = clevis.boundingbox(n4);
         	assertTrue(s1.equals(s2));
+    	}
+	
+	@Test
+    	void testPickandmove() {
+        	clevis.rectangle(n1, 4, 3, 2,3);
+        	clevis.square(n2, 4, 3, 1);
+        	Shape s1 = new Rectangle2D.Double(9,13,1,1);
+        	clevis.pickandmove(4,3,5,10);
+        	Shape temp = clevis.shapes.get(1).getShape();
+        	assertTrue(s1.equals(temp));
     	}
 }
