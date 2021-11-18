@@ -20,12 +20,14 @@ class test {
     	String n1;
     	String n2;
     	String n3;
+	String n4;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		n1 = "n1";
 		n2 = "n2";
 		n3 = "g1";
+		n4 = "n4";
 		
     	t1 = new Clevis.NameShape(n1, new Rectangle2D.Double(3, 3, 1, 1));
     	t2 = new Clevis.NameShape(n2, new Rectangle2D.Double(2, 5, 1, 1));
@@ -176,7 +178,7 @@ class test {
 	}
 
 	@Test
-	void testboundingbox() {
+	void testboundingbox1() {
 		clevis.rectangle(n1, 3, 3, 1, 1);
 		clevis.square(n2, 3, 3, 1);
 		String s1 = clevis.boundingbox(n1);
@@ -184,5 +186,15 @@ class test {
 		assertTrue(s1.equals(s2));
 	}
 
-	
+	@Test
+    	void testboundingbox2() {
+        	clevis.square(n1, 4, 3, 1);
+        	clevis.square(n2, 3, 3, 1);
+        	clevis.rectangle(n3, 3, 3, 2,1);
+       	 	String [] nList = {n1, n2};
+        	clevis.group(n4, nList);
+        	String s1 = clevis.boundingbox(n3);
+        	String s2 = clevis.boundingbox(n4);
+        	assertTrue(s1.equals(s2));
+    	}
 }
