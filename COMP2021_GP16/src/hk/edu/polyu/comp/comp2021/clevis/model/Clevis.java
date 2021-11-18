@@ -360,7 +360,7 @@ public class Clevis {
     }
 
     public void pickandmove (double x , double y, double dx, double dy){ //need fix
-        Line2D dot = new Line2D.Double(x, y, x, y);
+        Rectangle2D dot = new Rectangle2D.Double(x, y, 0.0001, 0.0001);
         Area areaA = new Area(dot);
         for (int i=shapes.size()-1;i>=0;i--){
             areaA.intersect(new Area(shapes.get(i).getShape()));
