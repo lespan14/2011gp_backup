@@ -265,10 +265,10 @@ public class Clevis {
         return String.format("%.2f",x) + " " + String.format("%.2f",y) + " " + String.format("%.2f",w) + " " + String.format("%.2f",h);
     }
 
-    public void intersect(String n1, String n2) {
+    public boolean intersect(String n1, String n2) {
         if (!isContained(n1)||!isContained(n2)){
             System.out.println("Shape does not exist");
-            return;
+            return false;
         }
 
         Shape a = null, b = null;
@@ -288,8 +288,10 @@ public class Clevis {
         areaA.intersect(new Area(b));
         if(!areaA.isEmpty()) {
             System.out.println(n1+" and "+n2+" intersect");
+            return true;
         }else {
             System.out.println(n1+" and "+n2+" do not intersect");
+            return false;
         }
     }
 
